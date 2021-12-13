@@ -1,0 +1,88 @@
+
+<!-- saved from url=(0042)https://x-ytong.github.io/project/GID.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>HPS-Net</title>
+<style id="system" type="text/css">
+    h1,h2,h3,h4,h5,h6,p,blockquote {    margin: 0;    padding: 0;}
+    body {font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif; 
+        font-size: 15px; line-height: 20px; color: #737373; margin: 10px 13px 10px 13px;}
+    tr,td {font-size: 15px; color: #737373; text-align: justify; text-justify: inter-character;}
+    ul {text-align: justify; text-justify: inter-character;}
+    a {color: #ff7f50; text-decoration: none;}
+    a:hover {color: #c39797; text-decoration: none;}
+    a img {border: none;}
+    p {margin-bottom: 9px; text-align: justify; text-justify: inter-character;}
+    h1,h2,h3,h4,h5,h6 {color: #20b2aa; line-height: 36px;}
+    h1 {margin-top: 50px; margin-bottom: 18px; font-size: 26px;}
+    h2 {margin-top: 24px; font-size: 20px;}
+    h3 {font-size: 18px;}
+    h4 {font-size: 16px;}
+    h5 {font-size: 14px;}
+    h6 {font-size: 13px;}
+    hr {margin: 0 0 19px; border: 0; border-bottom: 1px solid #ccc;}
+    blockquote {padding: 13px 13px 21px 15px; margin-bottom: 18px; font-family:georgia,serif; font-style: italic;}
+    blockquote:before {content:"C"; font-size:40px; margin-left:-10px; font-family:georgia,serif; color:#eee;}
+    blockquote p {font-size: 14px; font-weight: 300; line-height: 18px; margin-bottom: 0; font-style: italic;}
+    code, pre {font-family: Monaco, Andale Mono, Courier New, monospace;}
+    code {background-color: #fee9cc; color: rgba(0, 0, 0, 0.75); padding: 1px 3px; font-size: 12px; 
+        -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;}
+    pre {display: block; padding: 14px; margin: 0 0 18px; line-height: 16px; font-size: 11px; 
+        border: 1px solid #d9d9d9; white-space: pre-wrap; word-wrap: break-word;}
+    pre code {background-color: #fff; color:#737373; font-size: 11px; padding: 0;}
+    @media screen and (min-width: 768px) {body {width: 748px; margin:10px auto;}}
+    </style><style id="custom" type="text/css"></style></head>
+
+<body marginheight="0">
+<div align="center"><h1>Hidden Path Selection Network for Semantic Segmentation of Remote Sensing Images</h1></div>
+    
+<div style="border:2px solid #FFFFFF "></div>
+
+<div align="center">Kunping Yang, Xin-Yi Tong, Gui-Song Xia, Weiming Shen, Liangpei Zhang</div>
+
+<h2>Abstract</h2>
+<p>Targeting at depicting land covers with pixel-wise semantic categories, semantic segmentation in remote sensing images needs to portray diverse distributions over vast geographical locations, which is difficult to be achieved by the homogeneous pixel-wise forward paths in the architectures of existing deep models. Although several algorithms have been designed to select pixel-wise adaptive forward paths for natural image analysis, it still lacks theoretical supports on how to obtain optimal selections. In this paper, we provide mathematical analyses in terms of the parameter optimization, which guides us to design a method called Hidden Path Selection Network (HPS-Net). With the help of hidden variables derived from an extra mini-branch, HPS-Net is able to tackle the inherent problem about inaccessible global optimums by adjusting the direct relationships between feature maps and pixel-wise path selections in existing algorithms, which we call hidden path selection. For the better training and evaluation, we further refine and expand the 5-class Gaofen Image Dataset (GID-5) to a new one with 15 land-cover categories, i.e., GID-15. The experimental results on both GID-5 and GID-15 demonstrate that the proposed modules can stably improve the performance of different deep structures, which validates the proposed mathematical analyses.</p>
+
+<h3>Hidden Path Selection Network (HPS-Net)</h3>
+	<div align="center"><img src="./HPS-Net_files/Fig2.png" width="100%"></div>
+
+<p>In proposed Hidden Path Selection Network (HPS-Net), we portray the complicated pixel-wise land-cover distributions by imitating the hidden markov chain. As illustrated in the figure, we design the HPS-Net with independent parallel structures (i.e. a main-branch for semantic segmentation and a mini-branch for supporting) by exploiting a sequence of special modules called Hidden Path Module (HP-Module). Considering all items in the main-branch as variables, we notice that the high-dimension manifold where we excute the parameter optimization could be adjusted by utilizing hidden variables highly independent with main-branch. Thus, we utilize the HP-Module to obtain a sequence of soft masks by leveraging hidden variables from the mini-branch to select pixel-wise adaptive forward paths in the main branch through multiplication, where the adjusted high-dimension manifold would have higher possibility to contain the global optimums.</p>
+
+<h3>GID-15 Dataset</h3>
+	<div align="center"><img src="./HPS-Net_files/Fig5.png" width="100%"></div>
+
+<p>Data samples taken from our proposed GID-15 dataset. Different colors indicate different land-cover categories. The obscure land covers are blackened in the annotation masks. Several intact data samples are listed at the top and some cropped data patches are listed on the bottom, where we can see the annotation meticulousness with wide geographical areas covered.</p>
+
+<h3>- Download</h3>
+<p>GID-15 can be download from Baidudrive:</p>
+<p></p><li>Link: <a href="https://pan.baidu.com/s/1msAZGlWHxb9VvVYH_-hGyQ"><b>Baidudrive</b></a> (extraction code:mcnl)</li><p></p>
+		
+<h2>Experiment</h2>
+<p>We evaluate the proposed HPS-Net on both GID-5 and GID-15. Classical semantic segmentation algorithms Deeplabv3* and state-of-the-art pixel-wise dynamic models GPS-Net are picked for visual comparison. The experimental results demonstrate that the proposed modules can stably improve the performance of different deep structures.</p>
+<h3>- Experiments on GID-15</h3>
+        <div align="center"><img src="./HPS-Net_files/Fig7.png" width="100%"></div>
+<p>Examples of comparing our HPS-Net with the state-of-the-art pixel-wise dynamic method GPSNet on GID-15 with Resnet-101 as the backbone. Our proposed HPS-Net can better depict pixel-wise land-cover distributions. The blackened pixels are the ignored regions in the annotation masks, which are also ignored in the semantic segmentation results.</p>
+<h3>- Experiments on GID-5</h3>
+        <div align="center"><img src="./HPS-Net_files/Fig8.png" width="100%"></div>
+<p>Examples of comparing our HPS-Net with the basic residual structures Deeplabv3* on GID-5 with Resnet-101 as the backbone, which display the merits of applying the proposed hidden path selection on Deeplabv3* (i.e. HPS-Net-101).</p>
+
+
+
+<h2>Citation</h2>
+<pre>
+@misc{yang2021hidden,
+      title={Hidden Path Selection Network for Semantic Segmentation of Remote Sensing Images}, 
+      author={Kunping Yang and Xin-Yi Tong and Gui-Song Xia and Weiming Shen and Liangpei Zhang},
+      year={2021},
+      eprint={2112.05220},
+}
+</pre>
+
+<h2>Contact</h2>
+<p>E-mail : kunpingyang@whu.edu.cn<br> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp guisong.xia@whu.edu.cn</p>
+
+<div style="border:20px solid #FFFFFF "></div>
+
+
+
+</body></html>
